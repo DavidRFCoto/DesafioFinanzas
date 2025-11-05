@@ -6,9 +6,105 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
+    min-height: 100vh;
 }
 
+/* Estilos para la página de Login/Registro (Index.php) */
+body.login-body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor del Login/Registro */
+.contenedor.login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* ESTILOS BASE DE FORMULARIOS Y MENSAJES */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 5px #667eea;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+button {
+    padding: 12px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #764ba2;
+}
+
+.mensaje {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+}
+
+.mensaje a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #ffe6e6;
+    border-radius: 5px;
+}
+
+/* ESTILOS DEL DASHBOARD */
+
+/* Header y Logout */
 .header {
     background: #667eea;
     color: white;
@@ -21,16 +117,13 @@ body {
 
 .header h1 {
     font-size: 28px;
+    margin-bottom: 0;
 }
 
 .header div {
     display: flex;
     gap: 20px;
     align-items: center;
-}
-
-.header span {
-    font-size: 16px;
 }
 
 .logout {
@@ -60,30 +153,24 @@ body {
     margin-bottom: 30px;
 }
 
+/* Tarjetas de Acción */
 .card {
     background: white;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    cursor: pointer;
     transition: transform 0.3s;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-1px);
 }
 
 .card h2 {
     color: #333;
     margin-bottom: 15px;
     font-size: 20px;
-}
-
-.card p {
-    color: #666;
-    font-size: 16px;
-    margin-bottom: 20px;
 }
 
 .card button {
@@ -95,12 +182,10 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: background 0.3s;
+    width: auto;
 }
 
-.card button:hover {
-    background: #764ba2;
-}
-
+/* Resumen de Balance */
 .balance-card {
     grid-column: 1 / -1;
     background: linear-gradient(135deg, #667eea, #764ba2);
@@ -118,21 +203,13 @@ body {
     margin: 20px 0;
 }
 
-.balance-item {
-    text-align: center;
-}
-
-.balance-item h3 {
-    font-size: 14px;
-    margin-bottom: 10px;
-    opacity: 0.9;
-}
-
 .balance-item p {
     font-size: 28px;
     font-weight: bold;
     margin: 0;
 }
+
+/* SISTEMA DE TABS Y FORMULARIOS */
 
 .tab-contenido {
     display: none;
@@ -141,65 +218,41 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    padding: 20px; 
+    border: 1px solid #ddd;
+    background-color: #fff;
 }
 
+/* Estado Activo: La sección a mostrar */
 .tab-contenido.activo {
     display: block;
 }
 
-.tab-contenido h2 {
+.tab-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.tab-buttons button {
+    flex: 1;
+    background: #ddd;
     color: #333;
-    margin-bottom: 20px;
+    margin-top: 0;
+    padding: 12px;
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 5px #667eea;
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 100px;
-}
-
-.form-group button {
+.tab-buttons button.activo {
     background: #667eea;
     color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s;
 }
 
-.form-group button:hover {
-    background: #764ba2;
+.form-group button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
 }
 
+/* 5. ESTILOS DE TABLAS Y REPORTE */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -238,18 +291,13 @@ table tr:hover {
     text-align: center;
 }
 
-.reporte-item h3 {
-    font-size: 16px;
-    margin-bottom: 15px;
-    opacity: 0.9;
-}
-
 .reporte-valor {
     font-size: 32px;
     font-weight: bold;
     margin: 0;
 }
 
+/* MEDIA QUERIES (Responsividad) */
 @media (max-width: 768px) {
     .balance-info,
     .reporte-balance {
