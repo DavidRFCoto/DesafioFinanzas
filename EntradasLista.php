@@ -17,16 +17,18 @@ require_once 'Entradas.php';
     <title>Listado de Entradas</title>
     <link rel="stylesheet" href="./Css/Global.css">
 </head>
+
 <body>
     <div class="header">
         <h1>Control de Finanzas</h1>
+
         <div>
             <span>Bienvenido, <?php echo $_SESSION['usuario']; ?></span>
-            <a href="DashboardPrincipal.php" class="button-link back-button">Volver al Dashboard</a>
+            <a href="DashboardPrincipal.php" class="button-link back-button logout" style="background: #27a235ff;">Volver al Dashboard</a>
         </div>
     </div>
-    
-    <div class="contenedor">
+
+       <div class="contenedor">
         <div class="card full-width">
             <h2>Listado de Entradas</h2>
             <?php
