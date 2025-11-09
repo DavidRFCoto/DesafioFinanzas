@@ -2,28 +2,30 @@ function mostrarTab(tabId) {
     // Ocultar todos los tabs con una animación suave
     document.querySelectorAll('.tab-contenido').forEach(tab => {
         $(tab).fadeOut(200);
+        tab.classList.remove('activo');
     });
     
     // Mostrar el tab seleccionado con una animación suave
     setTimeout(() => {
-        document.querySelectorAll('.tab-contenido').forEach(tab => {
-            if (tab.id === tabId) {
-                $(tab).fadeIn(200);
-            }
-        });
+        const tabSeleccionado = document.getElementById(tabId);
+        if (tabSeleccionado) {
+            $(tabSeleccionado).fadeIn(200);
+            tabSeleccionado.classList.add('activo');
+        }
     }, 200);
 }
 
-// Inicializar la vista al cargar la página.
-// Por defecto, se muestra el tab de 'login' a menos que haya un error de registro.
+// Inicializar la vista al cargar la página
 window.onload = function() {
-    // Implementar lógica para determinar qué tab mostrar inicialmente
+    // Obtener parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('error') || urlParams.has('registro')) {
-        // Si hay error o registro, mostrar el tab de registro
+    
+    // Mostrar el tab apropiado según los parámetros
+    if (urlParams.has('registro_error')) {
+        // Solo mostrar registro si hay un error específico de registro
         mostrarTab('registro');
     } else {
-        // Por defecto, mostrar el tab de login
+        // En cualquier otro caso (incluyendo errores de login), mostrar el tab de login
         mostrarTab('login');
     }
 };

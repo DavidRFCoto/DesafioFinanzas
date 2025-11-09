@@ -199,9 +199,11 @@ require_once 'Salidas.php';
                                 echo '<tr>';
                                 echo '<td>' . htmlspecialchars($fila['concepto']) . '</td>';
                                 echo '<td class="text-danger">$' . number_format($fila['monto'], 2) . '</td>';
-                                echo '<td>' . date('d/m/Y', strtotime($fila['fecha'])) . '</td>';
+                                $fecha = new DateTime($fila['fecha']);
+                                echo '<td>' . $fecha->format('d/m/Y') . '</td>';
                                 echo '<td>' . htmlspecialchars($fila['descripcion']) . '</td>';
-                                echo '<td>' . date('d/m/Y H:i', strtotime($fila['fecha_registro'])) . '</td>';
+                                $fecha_registro = new DateTime($fila['fecha_registro']);
+                                echo '<td>' . $fecha_registro->format('d/m/Y H:i') . '</td>';
                                 echo '</tr>';
                                 
                                 // Agrupar datos para gráficos

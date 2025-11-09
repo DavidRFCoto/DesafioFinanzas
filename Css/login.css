@@ -1,0 +1,337 @@
+.login-page {
+    background: url('../img/finance-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.75) 0%, rgba(42, 82, 152, 0.70) 100%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+.login-box {
+    margin: 0 auto;
+    width: 400px;
+    animation: fadeInUp 0.5s ease-in-out;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-logo {
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.login-logo a {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.login-logo i {
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.login-card-body {
+    border-radius: 15px;
+    padding: 40px 30px;
+}
+
+.login-card-body .input-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-card-body .form-control {
+    border-right: 0;
+    height: calc(2.25rem + 2px);
+}
+
+.login-card-body .input-group-text {
+    background-color: #ffffff;
+    border-left: 0;
+    color: #777;
+    padding: 0.375rem 1rem;
+}
+
+.login-card-body .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: none;
+}
+
+.login-card-body .form-control:focus + .input-group-append .input-group-text {
+    border-color: #80bdff;
+}
+
+/* Estilo específico para el botón de mostrar/ocultar contraseña */
+.password-toggle {
+    border-left: 0;
+    background-color: #ffffff;
+    padding: 0.375rem 0.75rem;
+}
+
+.password-toggle {
+    cursor: pointer;
+    padding: 10px;
+    color: #666;
+    transition: color 0.3s ease;
+}
+
+.password-toggle:hover {
+    color: #2a5298;
+}
+
+.remember-me {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.login-card-body .custom-control-label {
+    cursor: pointer;
+    user-select: none;
+}
+
+.login-box-msg {
+    font-size: 1.2rem;
+    color: #2a5298;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 1.5rem !important;
+}
+
+.input-group .form-control {
+    border-radius: 8px;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.input-group .form-control:focus {
+    border-color: #2a5298;
+    box-shadow: 0 0 0 0.2rem rgba(42, 82, 152, 0.25);
+}
+
+.input-group-text {
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    border: 2px solid #e0e0e0;
+    color: #2a5298;
+}
+
+/* Estilos base para botones */
+.btn {
+    padding: 15px 30px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+/* Contenedor del botón */
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.col-12 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+/* Botón principal (Ingresar) */
+.btn-primary {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    border: none;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(42, 82, 152, 0.2);
+    min-width: 280px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(42, 82, 152, 0.3);
+    background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+}
+
+.btn-primary:active {
+    transform: translateY(1px);
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 60%);
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+}
+
+.btn-primary:hover::after {
+    transform: translateX(100%);
+}
+
+/* Botón de registro */
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* Enlaces de cambio de formulario */
+.text-primary {
+    position: relative;
+    padding-bottom: 2px;
+}
+
+.text-primary::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #2a5298;
+    transition: width 0.3s ease;
+}
+
+.text-primary:hover::after {
+    width: 100%;
+}
+
+/* Separación entre botones y enlaces */
+.mb-0.mt-3 {
+    margin-top: 2rem !important;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Mejoras en los iconos de los botones */
+.btn i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+    vertical-align: middle;
+}
+
+/* Contenedor de formulario */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    width: 100%;
+    max-width: 90%;
+    margin: 0 auto 1.5rem;
+}
+
+.alert {
+    border-radius: 8px;
+    margin-bottom: 25px;
+}
+
+.text-primary {
+    color: #2a5298 !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.text-primary:hover {
+    color: #1e3c72 !important;
+    text-decoration: none;
+}
+
+.tab-contenido {
+    transition: all 0.3s ease;
+}
+
+.mb-0.mt-3 {
+    margin-top: 1.5rem !important;
+}
+
+/* Animación para los mensajes de alerta */
+.alert {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    
+}
+
+@media (max-width: 576px) {
+    .btn-primary {
+        width: 100%;
+        min-width: unset;
+    }

@@ -171,7 +171,20 @@ if (!isset($_SESSION['id_usuario'])) {
                                                     <i class="fas fa-calendar"></i>
                                                 </span>
                                             </div>
-                                            <input type="date" class="form-control" id="fecha_entrada" name="fecha" required>
+                                            <?php 
+                                            $fecha_actual = new DateTime();
+                                            $fecha_valor = $fecha_actual->format('Y-m-d');
+                                            ?>
+                                            <input type="date" 
+                                                   class="form-control" 
+                                                   id="fecha_entrada" 
+                                                   name="fecha" 
+                                                   value="<?php echo htmlspecialchars($fecha_valor); ?>" 
+                                                   max="<?php echo htmlspecialchars($fecha_valor); ?>"
+                                                   pattern="\d{4}-\d{2}-\d{2}"
+                                                   required
+                                                   oninvalid="this.setCustomValidity('Por favor ingrese una fecha válida')"
+                                                   oninput="this.setCustomValidity('')">
                                         </div>
                                     </div>
                                     <div class="form-group">

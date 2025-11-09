@@ -14,32 +14,7 @@ body {
     background: #f4f6f9;
 }
 
-/* Estilos para la página de Login/Registro */
-.login-page {
-    background: linear-gradient(135deg, #2193b0, #6dd5ed);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-box {
-    width: 400px;
-    margin: 0;
-}
-
-.login-box .card {
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
-}
-
-.login-logo a {
-    color: #ffffff !important;
-    font-size: 2.1rem;
-    font-weight: 300;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+/* Estilos globales continúan aquí */
 
 /* Estilos de formularios y componentes */
 .form-control {
@@ -108,25 +83,7 @@ body {
     transform: translateY(-1px);
 }
 
-.mensaje {
-    text-align: center;
-    margin-top: 20px;
-    color: #666;
-}
-
-.mensaje a {
-    color: #667eea;
-    text-decoration: none;
-}
-
-.error {
-    color: red;
-    text-align: center;
-    margin-bottom: 20px;
-    padding: 10px;
-    background: #ffe6e6;
-    border-radius: 5px;
-}
+/* Los estilos de mensajes y errores se han movido a login.css */
 
 /* Estilos del Dashboard */
 .content-wrapper {
@@ -286,43 +243,7 @@ body {
     margin: 0;
 }
 
-/* SISTEMA DE TABS Y FORMULARIOS */
-
-.tab-contenido {
-    display: none;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-    padding: 20px; 
-    border: 1px solid #ddd;
-    background-color: #fff;
-}
-
-/* Estado Activo: La sección a mostrar */
-.tab-contenido.activo {
-    display: block;
-}
-
-.tab-buttons {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
-.tab-buttons button {
-    flex: 1;
-    background: #ddd;
-    color: #333;
-    margin-top: 0;
-    padding: 12px;
-}
-
-.tab-buttons button.activo {
-    background: #667eea;
-    color: white;
-}
+/* Los estilos de tabs se han movido a login.css */
 
 .form-group button[type="submit"] {
     width: 100%;

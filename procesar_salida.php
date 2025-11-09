@@ -12,11 +12,26 @@ if (!isset($_SESSION['id_usuario'])) {
 
 // Verificar que la solicitud sea POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // 3. Obtener y sanear los datos del formulario
+    // Obtener y sanear los datos del formulario
     $id_usuario = $_SESSION['id_usuario'];
     $monto = (float)($_POST['monto'] ?? 0);   
     $concepto = htmlspecialchars($_POST['concepto'] ?? '');
-    $fecha = htmlspecialchars($_POST['fecha'] ?? '');
+    
+    // Procesar la fecha
+    $fecha_input = $_POST['fecha'] ?? '';
+    if (empty($fecha_input)) {
+        header("Location: BalanceDetalle.php?error=fecha_invalida");
+        exit();
+    }
+    
+    // Validar y formatear la fecha
+    $fecha_obj = DateTime::createFromFormat('Y-m-d', $fecha_input);
+    if (!$fecha_obj) {
+        header("Location: BalanceDetalle.php?error=fecha_invalida");
+        exit();
+    }
+    $fecha = $fecha_obj->format('Y-m-d');
+    
     $descripcion = htmlspecialchars($_POST['descripcion'] ?? '');
 
     // Validar datos mínimos

@@ -10,11 +10,41 @@ class Entradas {
     }
 
     public function registrarEntrada($id_usuario, $concepto, $monto, $fecha, $descripcion) {
-        $query = "INSERT INTO entradas (id_usuario, concepto, monto, fecha, descripcion) 
-                  VALUES (?, ?, ?, ?, ?)";
-        $stmt = $this->conexion->prepare($query);
-        $stmt->bind_param("isids", $id_usuario, $concepto, $monto, $fecha, $descripcion);
-        return $stmt->execute();
+        try {
+            // Validación estricta de la fecha
+            if (!$this->validarFormatoFecha($fecha)) {
+                error_log("Fecha inválida recibida: " . $fecha);
+                return false;
+            }
+
+            // Preparar la consulta con la fecha explícita
+            $query = "INSERT INTO entradas (id_usuario, concepto, monto, fecha, descripcion) 
+                     VALUES (?, ?, ?, STR_TO_DATE(?, '%Y-%m-%d'), ?)";
+            
+            $stmt = $this->conexion->prepare($query);
+            if (!$stmt) {
+                error_log("Error preparando la consulta: " . $this->conexion->error);
+                return false;
+            }
+
+            $stmt->bind_param("isiss", $id_usuario, $concepto, $monto, $fecha, $descripcion);
+            $resultado = $stmt->execute();
+            
+            if (!$resultado) {
+                error_log("Error ejecutando la consulta: " . $stmt->error);
+                return false;
+            }
+
+            return true;
+        } catch (Exception $e) {
+            error_log("Error al registrar entrada: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    private function validarFormatoFecha($fecha) {
+        $fecha_obj = DateTime::createFromFormat('Y-m-d', $fecha);
+        return $fecha_obj && $fecha_obj->format('Y-m-d') === $fecha;
     }
 
     public function obtenerEntradas($id_usuario) {
