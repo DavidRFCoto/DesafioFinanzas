@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // 3. Llamar al método de validación de usuario    
     if ($login->validarUsuario($usuario, $contraseña)) {
-        header("Location: DashboardPrincipal.php");
+        header("Location: BalanceDetalle.php");
         exit();
     } else {
         header("Location: index.php?error=1");

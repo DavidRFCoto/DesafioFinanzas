@@ -33,5 +33,28 @@ class Salidas {
         $resultado = $stmt->get_result()->fetch_assoc();
         return $resultado['total'] ?? 0;
     }
+
+    public function obtenerSalidasPorMes($id_usuario, $mes) {
+        $inicio_mes = $mes . '-01';
+        $fin_mes = date('Y-m-t', strtotime($inicio_mes));
+        
+        $query = "SELECT * FROM salidas 
+                 WHERE id_usuario = ? 
+                 AND fecha BETWEEN ? AND ? 
+                 ORDER BY fecha";
+        
+        $stmt = $this->conexion->prepare($query);
+        $stmt->bind_param("iss", $id_usuario, $inicio_mes, $fin_mes);
+        $stmt->execute();
+        
+        $resultado = $stmt->get_result();
+        $salidas = array();
+        
+        while ($row = $resultado->fetch_assoc()) {
+            $salidas[] = $row;
+        }
+        
+        return $salidas;
+    }
 }
 ?>

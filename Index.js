@@ -1,30 +1,17 @@
-// Función para mostrar la pestaña (tab) de 'login' o 'registro'
-// y actualizar la clase 'activo' de los botones.
-// @param {string} tabId - El ID de la pestaña a mostrar ('login' o 'registro').
 function mostrarTab(tabId) {
-    // 1. Ocultar todas las pestañas de contenido
-    const contenidos = document.querySelectorAll('.tab-contenido');
-    contenidos.forEach(contenido => {
-        contenido.classList.remove('activo');
+    // Ocultar todos los tabs con una animación suave
+    document.querySelectorAll('.tab-contenido').forEach(tab => {
+        $(tab).fadeOut(200);
     });
-
-    // 2. Desactivar todos los botones
-    const botones = document.querySelectorAll('.tab-btn');
-    botones.forEach(boton => {
-        boton.classList.remove('activo');
-    });
-
-    // 3. Mostrar la pestaña seleccionada
-    const tabSeleccionada = document.getElementById(tabId);
-    if (tabSeleccionada) {
-        tabSeleccionada.classList.add('activo');
-    }
-
-    // 4. Activar el botón correspondiente
-    const btnSeleccionado = document.getElementById('btn-' + tabId);
-    if (btnSeleccionado) {
-        btnSeleccionado.classList.add('activo');
-    }
+    
+    // Mostrar el tab seleccionado con una animación suave
+    setTimeout(() => {
+        document.querySelectorAll('.tab-contenido').forEach(tab => {
+            if (tab.id === tabId) {
+                $(tab).fadeIn(200);
+            }
+        });
+    }, 200);
 }
 
 // Inicializar la vista al cargar la página.

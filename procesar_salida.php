@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validar datos mínimos
     if ($monto <= 0 || empty($concepto) || empty($fecha)) {
-        header("Location: DashboardPrincipal.php?error=datos_invalidos");
+        header("Location: BalanceDetalle.php?error=datos_invalidos");
         exit();
     }
 
@@ -29,16 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $salidas = new Salidas();
 
     if ($salidas->registrarSalida($id_usuario, $concepto, $monto, $fecha, $descripcion)) {
-        header("Location: DashboardPrincipal.php?registro=salida_ok");
+        header("Location: BalanceDetalle.php?registro=salida_ok");
         exit();
 
     } else {
-        header("Location: DashboardPrincipal.php?error=db_salida");
+        header("Location: BalanceDetalle.php?error=db_salida");
         exit();
     }
 
 } else {
-    header("Location: DashboardPrincipal.php");
+    header("Location: BalanceDetalle.php");
     exit();
 }
 ?>

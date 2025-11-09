@@ -2,7 +2,7 @@
 class ConexionDB {
     private $servidor = "localhost";
     private $usuario = "root";
-    private $contraseña = "dws1234";
+    private $contraseña = "";
     private $base_datos = "finanzas_db";
     private $conexion;
 
