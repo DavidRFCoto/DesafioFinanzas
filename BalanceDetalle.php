@@ -73,12 +73,12 @@ $datos = $reporte->obtenerReporte($_SESSION['id_usuario']) ?? ['total_entradas' 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="BalanceDetalle.php" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>Dashboard</p>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a href="RegistrarEntrada.php" class="nav-link">
                             <i class="nav-icon fas fa-plus-circle text-success"></i>

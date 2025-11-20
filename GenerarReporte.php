@@ -22,6 +22,8 @@ $reporte = new ReporteBalance();
 $entradas = new Entradas();
 $salidas = new Salidas();
 
+$totales = []; // Variable para guardar los totales del balance
+
 // Obtener datos según el tipo de reporte
 switch ($tipo_reporte) {
     case 'entradas':
@@ -33,7 +35,12 @@ switch ($tipo_reporte) {
         $titulo = "Reporte de Salidas - " . date('F Y', strtotime($mes));
         break;
     default:
-        $datos = $reporte->obtenerReporteMensual($_SESSION['id_usuario'], $mes);
+        // El reporte mensual devuelve un array con 'movimientos' y 'totales'.
+        $reporte_data = $reporte->obtenerReporteMensual($_SESSION['id_usuario'], $mes);
+        
+        $datos = $reporte_data['movimientos'];
+        $totales = $reporte_data['totales'];
+        
         $titulo = "Balance General - " . date('F Y', strtotime($mes));
         break;
 }
@@ -53,6 +60,7 @@ if ($formato === 'excel') {
     $sheet->setCellValue('B3', 'Concepto');
     $sheet->setCellValue('C3', 'Descripción');
     $sheet->setCellValue('D3', 'Monto');
+    $sheet->setCellValue('E3', 'Tipo');
     $sheet->getStyle('A3:D3')->getFont()->setBold(true);
     
     // Agregar datos
@@ -60,23 +68,37 @@ if ($formato === 'excel') {
     $totalMonto = 0;
     
     foreach ($datos as $dato) {
+        $monto_columna = $dato['monto'];
+        $monto_a_sumar = $dato['monto'];
+        $tipo_movimiento = $dato['tipo'] ?? ($tipo_reporte === 'entradas' ? 'entrada' : 'salida');
+        
+        // Si es el reporte Balance, las salidas deben ser negativas para calcular el Balance
+        if ($tipo_reporte === '' || $tipo_reporte === 'balance') {
+            if ($tipo_movimiento === 'salida') {
+                $monto_a_sumar *= -1;
+                $monto_columna = '(' . $monto_columna . ')';
+            }
+            $sheet->setCellValue('E' . $row, ucfirst($tipo_movimiento));
+        }
+        
         $sheet->setCellValue('A' . $row, date('d/m/Y', strtotime($dato['fecha'])));
         $sheet->setCellValue('B' . $row, $dato['concepto']);
         $sheet->setCellValue('C' . $row, $dato['descripcion']);
         $sheet->setCellValue('D' . $row, $dato['monto']);
         $sheet->getStyle('D' . $row)->getNumberFormat()->setFormatCode('$#,##0.00');
-        $totalMonto += $dato['monto'];
+        
+        $totalMonto += $monto_a_sumar;
         $row++;
     }
     
     // Agregar total
-    $sheet->setCellValue('C' . $row, 'Total:');
-    $sheet->setCellValue('D' . $row, $totalMonto);
-    $sheet->getStyle('D' . $row)->getFont()->setBold(true);
-    $sheet->getStyle('D' . $row)->getNumberFormat()->setFormatCode('$#,##0.00');
+    $sheet->setCellValue('D' . $row, 'Total Balance:');
+    $sheet->setCellValue('E' . $row, $totalMonto);
+    $sheet->getStyle('E' . $row)->getFont()->setBold(true);
+    $sheet->getStyle('E' . $row)->getNumberFormat()->setFormatCode('$#,##0.00');
     
     // Autoajustar columnas
-    foreach (range('A', 'D') as $col) {
+    foreach (range('A', 'E') as $col) {
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
     
@@ -115,19 +137,34 @@ if ($formato === 'excel') {
                     <th>Concepto</th>
                     <th>Descripción</th>
                     <th>Monto</th>
+                    <th>Tipo</th> </tr>
                 </tr>
             </thead>
             <tbody>';
     
     $totalMonto = 0;
+    $es_balance = ($tipo_reporte === '' || $tipo_reporte === 'balance');
     foreach ($datos as $dato) {
+        $monto_a_mostrar = '$' . number_format($dato['monto'], 2);
+        $monto_a_sumar = $dato['monto'];
+        $tipo_movimiento = $dato['tipo'] ?? ($tipo_reporte === 'entradas' ? 'entrada' : 'salida');
+        $columna_tipo = '';
+
+        if ($es_balance) {
+            if ($tipo_movimiento === 'salida') {
+                $monto_a_sumar *= -1;
+            }
+            $columna_tipo = '<td>' . ucfirst($tipo_movimiento) . '</td>';
+        }
         $html .= '<tr>';
         $html .= '<td>' . date('d/m/Y', strtotime($dato['fecha'])) . '</td>';
         $html .= '<td>' . htmlspecialchars($dato['concepto']) . '</td>';
         $html .= '<td>' . htmlspecialchars($dato['descripcion']) . '</td>';
-        $html .= '<td class="monto">$' . number_format($dato['monto'], 2) . '</td>';
+        $html .= '<td class="monto">' . $monto_a_mostrar . '</td>';
+        $html .= $columna_tipo;
         $html .= '</tr>';
-        $totalMonto += $dato['monto'];
+        
+        $totalMonto += $monto_a_sumar;
     }
     
     $html .= '

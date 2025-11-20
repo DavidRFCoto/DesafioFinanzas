@@ -194,7 +194,7 @@ require_once 'Entradas.php';
                                     </tr>
                                   </thead>';
                             echo '<tbody>';
-                            
+                            //taabal
                             while ($fila = $resultado->fetch_assoc()) {
                                 echo '<tr>';
                                 echo '<td>' . htmlspecialchars($fila['concepto']) . '</td>';

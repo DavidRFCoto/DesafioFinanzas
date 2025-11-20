@@ -2,7 +2,7 @@
 class ConexionDB {
     private $servidor = "localhost";
     private $usuario = "root";
-    private $contraseña = "";
+    private $contraseña = "MYSQL1234";
     private $base_datos = "finanzas_db";
     private $conexion;
 
